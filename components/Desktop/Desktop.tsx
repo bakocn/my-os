@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { DndContext, DragEndEvent } from "@dnd-kit/core";
 import DesktopIcon from "./DesktopIcon";
-import { IconItem } from "./types";
+import { IconItem } from "../types";
 import {
   ClipboardItem,
   pasteItem,
@@ -10,7 +10,7 @@ import {
   deleteItem,
   recoverItem,
   createNewIcon,
-} from "../utils/fileOperations";
+} from "../../utils/fileOperations";
 
 type DesktopProps = {
   onOpenApp: (appId: string) => void;
@@ -45,7 +45,7 @@ export default function Desktop({
 
   const [selectedIcons, setSelectedIcons] = useState<string[]>([]);
 
-  // --- Drag ikonica ---
+  // icon drag
   const handleDragEnd = (event: DragEndEvent) => {
     const { delta, active } = event;
     const id = active.id as string;
@@ -56,7 +56,7 @@ export default function Desktop({
     );
   };
 
-  // --- Desktop mouse events for selection ---
+
   const handleMouseDown = (e: React.MouseEvent) => {
     const target = (e.target as HTMLElement).closest(".desktop-icon");
     if (!target && e.button === 0) {
@@ -84,7 +84,7 @@ export default function Desktop({
       .filter((icon) => {
         const iconX = icon.position.x;
         const iconY = icon.position.y;
-        const size = 64; // icon size
+        const size = 64; 
         return iconX + size > box.x1 && iconX < box.x2 && iconY + size > box.y1 && iconY < box.y2;
       })
       .map((icon) => icon.id);
@@ -93,7 +93,6 @@ export default function Desktop({
     setSelectionBox({ ...selectionBox, active: false });
   };
 
-  // --- Desni klik na desktop ---
   const handleDesktopContextMenu = (e: React.MouseEvent) => {
     e.preventDefault();
     const target = (e.target as HTMLElement).closest(".desktop-icon");
@@ -102,7 +101,7 @@ export default function Desktop({
 
   const handleClick = (e: React.MouseEvent) => {
   const target = (e.target as HTMLElement);
-  // Ako klik nije na context menu ili na ikonicu, sakrij menu
+
   if (
     contextMenu.visible &&
     !target.closest(".desktop-icon") &&
@@ -123,13 +122,13 @@ const handlePointerDown = (e: React.PointerEvent) => {
   }
 };
 
-  // --- Desni klik na ikonicu ---
+ 
   const handleIconContextMenu = (e: React.MouseEvent, id: string) => {
     e.preventDefault();
     setContextMenu({ visible: true, x: e.clientX, y: e.clientY, iconId: id });
   };
 
-  // --- Akcije context menija ---
+  // context
   const handleMenuAction = (action: string, targetId?: string) => {
     if (action === "paste") {
       pasteItem(clipboard, icons, setIcons, { x: contextMenu.x - 40, y: contextMenu.y - 20 });
@@ -155,7 +154,7 @@ const handlePointerDown = (e: React.PointerEvent) => {
     setContextMenu({ ...contextMenu, visible: false });
   };
 
-  // --- Double click na ikonicu ---
+
   const handleDoubleClick = (icon: IconItem) => {
     onOpenApp(icon.type === "recycle" ? "recycle-bin" : icon.id);
   };

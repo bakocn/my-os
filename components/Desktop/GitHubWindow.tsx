@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import PdfViewer from "./PdfViewer";
+import PdfViewer from "./MyComputer/PdfViewer";
 
 
 type Repo = {
@@ -21,8 +21,8 @@ type FileItem = {
 
 type GitHubWindowProps = {
   username: string;
-  openWindow: (config: any) => void; // ovo ostaje za PDF/Explorer
-  openFileInNotepad: (name: string, content: string) => void; // dodato
+  openWindow: (config: any) => void; 
+  openFileInNotepad: (name: string, content: string) => void; 
 };
 
 export default function GitHubWindow({
@@ -34,7 +34,7 @@ export default function GitHubWindow({
   const [loading, setLoading] = useState(true);
 
   const [currentRepo, setCurrentRepo] = useState<Repo | null>(null);
-  const [path, setPath] = useState<string>(""); // "" je root
+  const [path, setPath] = useState<string>(""); 
   const [files, setFiles] = useState<FileItem[]>([]);
   const [fetchingFiles, setFetchingFiles] = useState(false);
 
@@ -74,7 +74,7 @@ export default function GitHubWindow({
 
     if (fileExt === "pdf") {
       const url = file.download_url || file.html_url;
-      if (!url) return; // ako nema URL, ne otvaraj
+      if (!url) return; 
 
       openWindow({
         id: `${currentRepo?.name}-${file.path}`,
@@ -91,7 +91,7 @@ export default function GitHubWindow({
         initialPosition: { x: window.innerWidth * 0.15, y: window.innerHeight * 0.1 },
       });
     } else {
-      // tekstualni fajlovi idu u Notepad
+     
       const url = file.download_url;
       if (!url) return;
 

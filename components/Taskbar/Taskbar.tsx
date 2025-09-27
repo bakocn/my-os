@@ -5,8 +5,8 @@ import Clock from "./Clock";
 
 type TaskbarProps = {
   windows: { id: string; title: string; icon: string; minimized: boolean }[];
-  onToggle: (id: string) => void; // minimize / restore
-  onFocus: (id: string) => void;  // bring to front
+  onToggle: (id: string) => void; // minimize 
+  onFocus: (id: string) => void;  // open
 };
 
 export default function Taskbar({ windows, onToggle, onFocus }: TaskbarProps) {

@@ -21,7 +21,7 @@ export const getUniqueName = <T extends { name?: string; title?: string }>(
   return newName;
 };
 
-// --- Desktop & Explorer actions ---
+// --- Actions ---
 export const pasteItem = <T extends { id: string; title?: string; name?: string; position?: any }>(
   clipboard: ClipboardItem<T> | null,
   items: T[],

@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { FileItem } from "./types";
+import { FileItem } from "../../types";
 
 type ExplorerProps = {
   files: FileItem[];
@@ -17,7 +17,7 @@ export default function Explorer({ files, setFiles, openApp }: ExplorerProps) {
     ? currentPath[currentPath.length - 1]
     : { children: files } as FileItem;
 
-  // --- Otvaranje foldera ---
+
   const openFolder = (folder: FileItem) => {
     if (folder.type !== "folder" || !folder.children) return;
     setCurrentPath(prev => [...prev, folder]);
@@ -25,7 +25,7 @@ export default function Explorer({ files, setFiles, openApp }: ExplorerProps) {
 
   const goBack = () => setCurrentPath(prev => prev.slice(0, prev.length - 1));
 
-  // --- Pronalaženje fajla po ID ---
+
   const findFile = (items: FileItem[], id: string): FileItem | null => {
     for (const item of items) {
       if (item.id === id) return item;
@@ -37,14 +37,14 @@ export default function Explorer({ files, setFiles, openApp }: ExplorerProps) {
     return null;
   };
 
-  // --- Uklanjanje fajla iz strukture ---
+
   const removeFile = (items: FileItem[], id: string): FileItem[] => {
     return items
       .filter(item => item.id !== id)
       .map(item => ({ ...item, children: item.children ? removeFile(item.children, id) : undefined }));
   };
 
-  // --- Drag & drop ---
+  // drag drop
   const handleFileDrop = (draggedId: string, targetId: string) => {
     if (draggedId === targetId) return;
 
@@ -69,7 +69,7 @@ export default function Explorer({ files, setFiles, openApp }: ExplorerProps) {
     setFiles(newFiles);
   };
 
-  // --- Odabir ikone ---
+ 
   const getIcon = (item: FileItem) => {
     if (item.type === "folder") return "/icons/folder.png";
     const ext = item.name.split(".").pop()?.toLowerCase();
@@ -119,7 +119,7 @@ export default function Explorer({ files, setFiles, openApp }: ExplorerProps) {
       title: item.name,
       content: item.content ?? "",
       fromExplorer: true,
-      id: item.id, // ← dodaj ID fajla iz Explorer-a
+      id: item.id, 
     });
 }}
 

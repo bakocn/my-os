@@ -1,14 +1,14 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import Desktop from "./Desktop";
+import Desktop from "../Desktop/Desktop";
 import Window from "./Window";
-import Taskbar from "./Taskbar";
-import RecycleBin from "./RecycleBin";
-import Explorer from "./Explorer";
-import PdfViewer from "./PdfViewer";
-import { IconItem, FileItem, AppWindow } from "./types";
-import GitHubWindow from "./GitHubWindow";
-import NotepadWindow from "./NotepadWindow";
+import Taskbar from "../Taskbar/Taskbar";
+import RecycleBin from "../Desktop/RecycleBin";
+import Explorer from "../Desktop/MyComputer/Explorer";
+import PdfViewer from "../Desktop/MyComputer/PdfViewer";
+import { IconItem, FileItem, AppWindow } from "../types";
+import GitHubWindow from "../Desktop/GitHubWindow";
+import NotepadWindow from "../Desktop/NotepadWindow";
 
 export default function WindowManager() {
   const [windows, setWindows] = useState<AppWindow[]>([]);
@@ -45,7 +45,7 @@ export default function WindowManager() {
       ],
     },
   ]);
-// --- openFileInNotepad ---
+// --- opens file in notepad ---
 const openFileInNotepad = (
   title: string,
   content: string,
@@ -68,7 +68,7 @@ const openFileInNotepad = (
           content={content}
           onSave={(file) => {
            if (fromExplorer) {
-              // samo update sadržaja u Explorer-u
+              // update exp
               setFileTree((prevFiles) => {
                 const updateContent = (items: FileItem[]): FileItem[] =>
                   items.map((i) =>
@@ -81,7 +81,7 @@ const openFileInNotepad = (
                 return updateContent(prevFiles);
               });
             } else {
-              // update desktopIcons
+              // update desk icons
               setDesktopIcons((icons) => {
                 const exists = icons.find((i) => i.id === uniqueId);
                 if (exists) {
@@ -175,7 +175,7 @@ const openFileInNotepad = (
   };
 
   const openApp = (appId: string, extra?: { content?: string; title?: string;fromExplorer?: boolean }) => {
-  // --- Provera da li je app već otvoren ---
+
   const exists = windows.find(
     (w) => w.id === appId || (w.id === "my-computer" && appId === "explorer")
   );
@@ -184,7 +184,7 @@ const openFileInNotepad = (
     return;
   }
 
-  // --- RECYCLE BIN ---
+  // rec bin
   if (appId === "recycle-bin") {
     openWindow({
       id: "recycle-bin",
@@ -201,7 +201,7 @@ const openFileInNotepad = (
     return;
   }
 
-  // --- EXPLORER ---
+  // exp
   if (appId === "explorer") {
     openWindow({
       id: "my-computer",
@@ -217,7 +217,7 @@ const openFileInNotepad = (
     return;
   }
 
-  // --- NOTEPAD / TEKSTUALNI FAJLOVI ---
+  // notepad
   const desktopIcon = desktopIcons.find((i) => i.id === appId);
   if (desktopIcon && desktopIcon.type === "file" ) {
     const ext = desktopIcon.title.split(".").pop()?.toLowerCase();
@@ -249,7 +249,7 @@ const openFileInNotepad = (
     }
   }
 
-  // --- PDF / Resume ---
+  // pdf/resume
   if (appId === "resume") {
     const width = window.innerWidth * 0.7;
     const height = window.innerHeight * 0.9;
@@ -267,7 +267,7 @@ const openFileInNotepad = (
     return;
   }
 
-  // --- NOTEPAD ICON (general untitled) ---
+  // notepad
   if (appId === "notepad") {
   const uniqueId = "notepad-" + Date.now(); // svaki put jedinstveno
   openWindow({
@@ -279,7 +279,7 @@ const openFileInNotepad = (
         fileName={extra?.title ?? "Untitled.txt"}
         content={extra?.content ?? ""}
         onSave={(file) => {
-          // samo dodaj na desktop, ne utiče na GitHubWindow
+
           setDesktopIcons((prev) => [
             ...prev,
             {
@@ -301,7 +301,7 @@ const openFileInNotepad = (
 }
 
 
-  // --- GITHUB ---
+  // github
   if (appId === "github") {
     openWindow({
       id: "github",
@@ -321,7 +321,7 @@ const openFileInNotepad = (
     return;
   }
 
-  // --- DEFAULT FALLBACK ---
+  // default
  if (desktopIcon && desktopIcon.type === "file" || extra?.content !== undefined) {
   const title = extra?.title ?? desktopIcon?.title ?? "Untitled.txt";
   const content = extra?.content ?? desktopIcon?.content ?? "";
@@ -330,7 +330,7 @@ const openFileInNotepad = (
   return;
 }
 
-// fallback za sve ostalo
+// every other file
 openWindow({
   id: appId,
   title: appId.replace(/-/g, " "),
