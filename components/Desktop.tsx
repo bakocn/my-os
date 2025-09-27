@@ -70,7 +70,7 @@ export default function Desktop({
     setSelectionBox((prev) => ({ ...prev, endX: e.clientX, endY: e.clientY }));
   };
 
-  const handleMouseUp = (e: React.MouseEvent) => {
+  const handleMouseUp = () => {
     if (!selectionBox.active) return;
 
     const box = {

@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import PdfViewer from "./PdfViewer";
-import NotepadWindow from "./NotepadWindow";
+
 
 type Repo = {
   id: number;

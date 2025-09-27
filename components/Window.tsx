@@ -45,7 +45,7 @@
           setPosition({ x: 0, y: 0 });
           setSize({ width: window.innerWidth, height: window.innerHeight });
         }
-      }, [defaultMaximized]);
+      }, [defaultMaximized,position,size]);
 
       const toggleMaximize = () => {
         if (isMaximized) {
