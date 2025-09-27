@@ -1,12 +1,10 @@
-import type { NextConfig } from "next";
+/** @type {import('next').NextConfig} */
+const dev = process.env.NODE_ENV === 'development';
 
-const nextConfig: NextConfig = {
-   output: 'export',
-  basePath: '/my-os', // ime repoa
-  assetPrefix: '/my-os/', 
-  eslint: {
-    ignoreDuringBuilds: true, // ignorise ESLint tokom build-a
-  },
+const nextConfig = {
+  output: dev ? undefined : 'export',  // samo za build/export
+  basePath: dev ? '' : '/my-os',       // samo za deploy
+  assetPrefix: dev ? '' : '/my-os',   // samo za deploy
 };
 
 export default nextConfig;
