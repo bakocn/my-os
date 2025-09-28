@@ -15,7 +15,7 @@
       initialPosition?: { x: number; y: number };
     };
 
-    export default function Window({
+    export default function DefWindow({
       title,
       icon,
       render,

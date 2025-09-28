@@ -2,22 +2,11 @@
 
 import React, { useEffect, useState } from "react";
 import PdfViewer from "./MyComputer/PdfViewer";
+import { Repo,FileItem } from "@/utils/types";
 
 
-type Repo = {
-  id: number;
-  name: string;
-  html_url: string;
-  description: string | null;
-};
 
-type FileItem = {
-  name: string;
-  path: string;
-  type: "file" | "dir";
-  download_url?: string;
-  html_url?: string;
-};
+
 
 type GitHubWindowProps = {
   username: string;
@@ -109,11 +98,11 @@ export default function GitHubWindow({
   if (loading) return <div className="p-4">Loading repositories...</div>;
 
   return (
-    <div className="flex flex-col h-full w-full ">
-        <h1 className="p-2 font-bold border-b">My Repositories</h1>
+    <div className="flex flex-col h-full w-full bg-[#0d1117] ">
+        <h1 className="p-2 font-bold bg-gray-200 border-b">My Repositories</h1>
       {currentRepo ? (
         <>
-          <div className="p-2 border-b flex items-center gap-2">
+          <div className="  p-2 border-b flex items-center ">
             <button
               onClick={() => {
                 const segments = path.split("/").filter(Boolean);
@@ -127,22 +116,24 @@ export default function GitHubWindow({
             >
               Back
             </button>
-            <span className="font-semibold">
+            <span className=" px-3 font-semibold text-white">
               {currentRepo.name}/{path}
             </span>
           </div>
           {fetchingFiles ? (
             <div className="p-2">Loading files...</div>
           ) : (
-            <div className="flex-1 overflow-auto p-2 grid grid-cols-4 gap-2">
+            <div className="flex-1 overflow-auto p-2 grid grid-cols-4">
               {files.map((file) => (
                 <div
                   key={file.path}
-                  className="p-2 border rounded hover:bg-gray-100 cursor-pointer flex flex-col items-center"
+                  className=" w-30 h-fit p-1 border bg-gray-200 rounded hover:bg-gray-100 cursor-pointer flex flex-col items-center"
                   onDoubleClick={() => {
                     if (file.type === "dir") {
+
+                      if(file.path){
                       setPath(file.path);
-                      fetchRepoContents(currentRepo.name, file.path);
+                      fetchRepoContents(currentRepo.name, file.path);}
                     } else {
                       handleOpenFile(file);
                     }
@@ -156,11 +147,11 @@ export default function GitHubWindow({
           )}
         </>
       ) : (
-        <div className="flex-1 overflow-auto p-2 grid grid-cols-4 gap-2">
+        <div className="flex-1 overflow-auto px-10 p-5 py-3 gap-5 grid grid-cols-3 ">
           {repos.map((repo) => (
-            <div
+            <div 
               key={repo.id}
-              className="p-2 border rounded hover:bg-gray-100 cursor-pointer flex flex-col items-center"
+              className="p-2 border rounded hover:bg-gray-100 cursor-pointer flex flex-col items-center bg-gray-200"
               onDoubleClick={() => {
                 setCurrentRepo(repo);
                 setPath("");

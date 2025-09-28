@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { DndContext, DragEndEvent } from "@dnd-kit/core";
 import DesktopIcon from "./DesktopIcon";
-import { IconItem } from "../types";
+import { IconItem } from "@/utils/types";
 import {
   ClipboardItem,
   pasteItem,

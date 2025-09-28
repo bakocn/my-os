@@ -1,5 +1,5 @@
 import React from "react";
-import { IconItem, FileItem } from "../components/types";
+import { IconItem, FileItem } from "./types";
 
 export type ClipboardItem<T> = {
   item: T;
@@ -84,7 +84,7 @@ export function createNewIcon(
   icons: IconItem[]
 ): IconItem {
   const newId = `${type}-${Date.now()}`;
-  const newName = type === "folder" ? "New Folder" : "New Text Document";
+  const newName = type === "folder" ? "New Folder" : "New Text Document.txt";
   let x = contextX - 50;
   let y = contextY - 20;
   while (icons.some((icon) => Math.abs(icon.position.x - x) < 40 && Math.abs(icon.position.y - y) < 40)) {

@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { useDraggable } from "@dnd-kit/core";
-import { Position } from "../types";
+import { Position } from "../../utils/types";
 
 export type DesktopIconProps = {
   id: string;

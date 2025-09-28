@@ -1,4 +1,4 @@
-import { IconItem } from "../types";
+import { IconItem } from "../../utils/types";
 
 export default function RecycleBin({
   deletedIcons,
