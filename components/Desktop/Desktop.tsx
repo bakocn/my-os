@@ -184,7 +184,7 @@ const handlePointerDown = (e: React.PointerEvent) => {
           />
         ))}
 
-        {/* Selection rectangle */}
+        
         {selectionBox.active && (
           <div
             className="absolute border-2 border-blue-400 bg-blue-200/30 z-40"
@@ -197,7 +197,7 @@ const handlePointerDown = (e: React.PointerEvent) => {
           />
         )}
 
-        {/* Context menu */}
+   
         {contextMenu.visible && (
           <ul
   className="absolute bg-gray-900 text-white rounded-lg shadow-xl py-2 text-base z-50 cursor-default min-w-[180px] font-sans context-menu"
@@ -221,7 +221,7 @@ const handlePointerDown = (e: React.PointerEvent) => {
               </>
             ) : (
               <>
-                {/* NEW submenu */}
+           
                 <li
                   className="px-4 py-2 hover:bg-gray-800 rounded relative flex justify-between items-center cursor-pointer"
                   onMouseEnter={() => setHoverNew(true)}

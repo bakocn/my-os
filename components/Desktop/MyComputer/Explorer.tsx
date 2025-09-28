@@ -41,7 +41,7 @@ export default function Explorer({ files, setFiles, openApp }: ExplorerProps) {
         ))}
       </div>
 
-      {/* File grid */}
+    
       <div className="flex-1 overflow-auto border rounded p-2 grid grid-cols-4 gap-4">
         {currentFolder.children?.map(item => (
           <div

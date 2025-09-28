@@ -21,7 +21,7 @@ export const getUniqueName = <T extends { name?: string; title?: string }>(
   return newName;
 };
 
-// --- Actions ---
+//  ActionsMenu
 export const pasteItem = <T extends { id: string; title?: string; name?: string; position?: any }>(
   clipboard: ClipboardItem<T> | null,
   items: T[],
@@ -100,7 +100,7 @@ export function createNewIcon(
   };
 }
 
-// Explorer helper
+
 export function createNewFile(type: "folder" | "file", currentFiles: FileItem[], parentFolderId?: string): FileItem[] {
   const newId = `${type}-${Date.now()}`;
   const newName = type === "folder" ? "New Folder" : "New File";

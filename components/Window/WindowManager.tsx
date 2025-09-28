@@ -175,7 +175,7 @@ ${asciiPC}` },
   };
 
   const openApp = (appId: string, extra?: { content?: string; title?: string; fromExplorer?: boolean }) => {
-    const exists = windows.find((w) => w.id === appId || (w.id === "my-computer" && appId === "explorer"));
+    const exists = windows.find((w) => w.id === appId || (w.id === "about-me" && appId === "explorer"));
     if (exists) { focusApp(exists.id); return; }
 
     const findFileInTree = (items: FileItem[]): FileItem | undefined => {
@@ -269,8 +269,8 @@ ${asciiPC}` },
   
     if (appId === "explorer") {
       openWindow({
-        id: "my-computer",
-        title: "My Computer",
+        id: "about-me",
+        title: "About me",
         icon: "/icons/about-me.png",
         render: () => <Explorer files={fileTree} setFiles={setFileTree} openApp={openApp} />,
         defaultMaximized: false,
