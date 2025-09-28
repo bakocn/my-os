@@ -1,10 +1,10 @@
-// components/Desktop/MyComputer/ImageWindow.tsx
+
 "use client";
 import React from "react";
 
 interface ImageWindowProps {
   fileName: string;
-  fileUrl: string; // putanja do slike
+  fileUrl: string;
 }
 
 export default function ImageWindow({ fileName, fileUrl }: ImageWindowProps) {

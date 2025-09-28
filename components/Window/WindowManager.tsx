@@ -95,7 +95,7 @@ ${asciiPC}` },
     },
   ]);
 
-  // --- opens text file in Notepad ---
+  //  opens notepad 
   const openFileInNotepad = (title: string, content: string, id?: string, fromExplorer = false) => {
     const uniqueId = id ?? "notepad-" + Date.now();
     setWindows((prev) => [
@@ -190,7 +190,7 @@ ${asciiPC}` },
 
     const fileFromTree = findFileInTree(fileTree);
 
-    // --- IMAGE FILES ---
+   
     if (fileFromTree) {
       const ext = (fileFromTree.name.split(".").pop() ?? "").toLowerCase();
       if (["jpg", "jpeg", "png", "gif"].includes(ext)) {
@@ -227,17 +227,17 @@ ${asciiPC}` },
       render: () => (
         <AudioWindow fileName={fileFromTree.name} fileUrl={fileFromTree.url ?? ""} />
       ),
-        initialSize: { width: 600, height: 400 },  // <-- ovde postavi veće
+        initialSize: { width: 600, height: 400 }, 
   initialPosition: { x: 120 + windows.length * 20, y: 80 + windows.length * 20 },
     });
     return;
   }
-      // --- TEXT FILES ---
+ 
       if (["txt", "md", "cs", "js", "json", "ts", "jsx", "tsx"].includes(ext)) {
         openFileInNotepad(extra?.title ?? fileFromTree.name, extra?.content ?? fileFromTree.content ?? "", fileFromTree.id, true);
         return;
       }
-      // --- PDF FILES ---
+    
       if (ext === "pdf") {
         const width = window.innerWidth * 0.7;
         const height = window.innerHeight * 0.9;
@@ -255,7 +255,7 @@ ${asciiPC}` },
       }
     }
 
-    // --- RECYCLE BIN ---
+  
     if (appId === "recycle-bin") {
       openWindow({
         id: "recycle-bin",
@@ -266,7 +266,7 @@ ${asciiPC}` },
       return;
     }
 
-    // --- EXPLORER ---
+  
     if (appId === "explorer") {
       openWindow({
         id: "my-computer",
@@ -280,7 +280,7 @@ ${asciiPC}` },
       return;
     }
 
-    // --- NOTEPAD NEW ---
+
     if (appId === "notepad") {
       const uniqueId = "notepad-" + Date.now();
       openWindow({
@@ -305,7 +305,7 @@ ${asciiPC}` },
       return;
     }
 
-    // --- GITHUB ---
+
     if (appId === "github") {
       openWindow({
         id: "github",

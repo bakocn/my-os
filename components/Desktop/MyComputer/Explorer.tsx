@@ -55,7 +55,7 @@ export default function Explorer({ files, setFiles, openApp }: ExplorerProps) {
             }}
             onDragOver={(e) => e.preventDefault()}
             onDoubleClick={() => {
-  // otvori folderi, songs, videos, pictures
+
   if (item.children) openFolder(item);
   else
     openApp?.(item.id, {
