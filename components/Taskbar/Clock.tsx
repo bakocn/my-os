@@ -1,17 +1,19 @@
 "use client";
-import React, { useEffect } from "react";
-type ClockProps = {
-  time: Date;
-  setTime: React.Dispatch<React.SetStateAction<Date>>;
-};
+import { useEffect, useState } from "react";
 
-export default function Clock({ time, setTime }: ClockProps) {
+export default function Clock() {
+  const [time, setTime] = useState<string>("");
+
   useEffect(() => {
-    const update = () => setTime(new Date());
+    const update = () => setTime(new Date().toLocaleTimeString("en-GB")); 
     update();
     const interval = setInterval(update, 1000);
     return () => clearInterval(interval);
-  }, [setTime]);
+  }, []);
 
-  return <div className="text-white font-mono text-sm px-2">{time.toLocaleTimeString()}</div>;
+  return (
+    <div className="text-white font-mono text-sm px-2">
+      {time}
+    </div>
+  );
 }
